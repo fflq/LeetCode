@@ -28,7 +28,7 @@ using namespace std ;
 #endif
 
 template<typename T>
-inline void print_vec(vector<T> vec) {
+inline void print_vec(vector<T> &vec) {
     for (auto a : vec)
         cout << a << ", " ;
     cout << endl ;
@@ -62,10 +62,6 @@ int ufsUnion(int *fa, int a, int b) {
 
 
 // 堆
-void updateMaxHeap(vector<int> &vec) {
-    for (int i = vec.size()/2; i >= 0; -- i)    
-        adjustMaxHeap(vec, i, vec.size()) ;
-}
 void adjustMaxHeap(vector<int> &vec, int k, int end) {
     int left = 2*k+1, right = 2*k+2, bigidx = k ;
     // 先选出三者间最大值得索引
@@ -75,6 +71,10 @@ void adjustMaxHeap(vector<int> &vec, int k, int end) {
         swap (vec[bigidx], vec[k]) ;
         adjustMaxHeap (vec, bigidx, end) ;
     }
+}
+void updateMaxHeap(vector<int> &vec) {
+    for (int i = vec.size()/2; i >= 0; -- i)    
+        adjustMaxHeap(vec, i, vec.size()) ;
 }
 void insertMaxHeap(vector<int> &vec, int num) {
     vec.push_back (num) ;

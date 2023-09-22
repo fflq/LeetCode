@@ -1,13 +1,16 @@
 #ifndef _HEADS_H_
 #define _HEADS_H_
 
-#include <iostream>
-#include <sstream>
-
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
 #include <cmath>
+#include <cassert>
+#include <ctime>
+#include <cstdint>
+
+#include <iostream>
+#include <sstream>
 
 #include <list>
 #include <vector>
@@ -20,6 +23,8 @@
 
 #include <algorithm>
 #include <numeric>
+#include <bitset>
+
 
 using namespace std ;
 
@@ -39,5 +44,15 @@ inline void print_list(T p) {
     while (p)   cout << p->val << ", ", p = p->next ;
     cout << endl ;
 }
+
+#ifdef FLQ_DEP
+class Solution;
+void flqmain();
+int smain() {
+    cout << "*** flqmain ***" << endl ;
+    flqmain();
+    return 0 ;
+}
+#endif
 
 #endif

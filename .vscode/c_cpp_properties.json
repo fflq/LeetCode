@@ -3,18 +3,22 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${vcpkgRoot}/x64-windows/include",
+                "${vcpkgRoot}/x86-windows/include",
+                "${vcpkgRoot}/x86-windows-static/include"
             ],
+            //fflq, only useful in code view, add to tasks.json for compiling.
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE",
                 "FLQ"
             ],
+            "compilerPath": "D:\\App\\SDK\\mingw64\\bin\\g++.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "gcc-x64",
-            "compilerPath": "D:/SDK/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/g++.exe"
+            "intelliSenseMode": "windows-gcc-x64"
         }
     ],
     "version": 4

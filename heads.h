@@ -24,7 +24,9 @@
 #include <algorithm>
 #include <numeric>
 #include <bitset>
+#include <functional>
 
+//#include <format>
 
 using namespace std ;
 
@@ -33,14 +35,14 @@ using namespace std ;
 #endif
 
 template<typename T>
-inline void print_vec(vector<T> vec) {
+inline void print_vec(vector<T>& vec) {
     for (auto a : vec)
         cout << a << ", " ;
     cout << endl ;
 }
 
 template<typename T>
-inline void print_list(T p) {
+inline void print_list(T& p) {
     while (p)   cout << p->val << ", ", p = p->next ;
     cout << endl ;
 }

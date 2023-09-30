@@ -3,23 +3,58 @@
  *
  * [34] 在排序数组中查找元素的第一个和最后一个位置
  */
-#ifdef FLQ
 #include "heads.h"
-#endif
 
 // @lc code=start
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
+        return searchRange20230929(nums, target) ;
         return searchRange1(nums, target) ;
         return searchRange2(nums, target) ;
-        return searchRange3(nums, target) ;
     }
 
-    // 二分模板3，放弃
-    vector<int> searchRange3(vector<int>& nums, int t) {
-        return {-1, -1} ;
+
+    vector<int> searchRange20230929(vector<int>& nums, int target) {
+        //std::*, lb >= target, ub > target
+        //auto lb = lower_bound(nums.begin(), nums.end(), target) ;
+        //auto ub = upper_bound(nums.begin(), nums.end(), target) ;
+        auto lb = x_lower_bound(nums.begin(), nums.end(), target) ;
+        auto ub = x_upper_bound(nums.begin(), nums.end(), target) ;
+        if (lb == nums.end() || *lb != target)
+            return {-1, -1};
+        return {static_cast<int>(lb-nums.begin()), 
+                static_cast<int>(ub-nums.begin()-1)};
     }
+
+
+    //overwrite std:*
+    using viit = vector<int>::iterator ;
+    viit x_lower_bound(viit begit, viit endit, int target) {
+        viit midit;
+        while (begit < endit) {
+            midit = (int)(endit-begit)/2 + begit ;
+            if (*midit >= target) // diff
+                endit = midit ;
+            else 
+                begit = midit + 1 ;
+        }
+        //begit == endit
+        return begit;
+    }
+    
+    viit x_upper_bound(viit begit, viit endit, int target) {
+        viit midit;
+        while (begit < endit) {
+            midit = (int)(endit-begit)/2 + begit ;
+            if (*midit > target) // diff
+                endit = midit ;
+            else 
+                begit = midit + 1 ;
+        }
+        return begit;
+    }
+
 
     // 二分模板2，放弃
     vector<int> searchRange2(vector<int>& nums, int t) {
@@ -31,6 +66,7 @@ public:
         }
         return {-1, -1} ;
     }
+
 
     // 二分模板1
     vector<int> searchRange1(vector<int>& nums, int t) {
@@ -54,3 +90,17 @@ public:
 };
 // @lc code=end
 
+int main() {
+    Solution sol;
+    {
+        vector<int> v{5,7,7,8,8,10} ;
+        vector<int> r{3,4};
+        assert(sol.searchRange(v, 8) == r) ;
+    }
+    {
+        vector<int> v{5,7,7,8,8,10} ;
+        vector<int> r{-1,-1};
+        assert(sol.searchRange(v, 6) == r) ;
+    }
+    return 0;
+}

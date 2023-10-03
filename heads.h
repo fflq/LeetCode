@@ -35,9 +35,16 @@ using namespace std ;
 #endif
 
 template<typename T>
-inline void print_vec(vector<T>& vec) {
+inline void print_vec(const vector<T>& vec) {
     for (auto a : vec)
         cout << a << ", " ;
+    cout << endl ;
+}
+
+template<typename T>
+inline void print_vvec(const vector<vector<T>>& vv) {
+    for (auto& v : vv)
+        print_vec(v);
     cout << endl ;
 }
 
